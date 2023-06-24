@@ -49,9 +49,13 @@ In the event of a problem (such as email already register, password less than 6 
 |-- lib
     |-- core
         |-- constants
-            |-- usecases
+            |-- routes.dart
         |-- http_client
-        |-- util
+            |-- base_http_client.dart
+            |-- dio_with_auth.dart
+            |-- dio.dart
+        |-- utils
+            |-- usecase.dart
     |-- data
         |-- providers
             |-- api_client.dart
