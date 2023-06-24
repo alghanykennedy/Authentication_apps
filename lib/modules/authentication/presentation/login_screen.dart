@@ -115,22 +115,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       const Text("Don't have an account? "),
                       TextButton(
-                          onPressed: () {
-                            Get.toNamed(RouteNames.signupScreen);
-                          },
-                          child: const Text(
-                            "Signup",
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                            ),
-                          ))
+                        onPressed: () {
+                          Get.toNamed(RouteNames.signupScreen);
+                        },
+                        child: const Text(
+                          "Signup",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],

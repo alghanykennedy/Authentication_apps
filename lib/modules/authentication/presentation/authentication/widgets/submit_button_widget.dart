@@ -8,7 +8,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350,
+      width: 300,
       height: 50,
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [
@@ -35,7 +35,7 @@ class SubmitButton extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
-            fontSize: 24,
+            fontSize: 22,
             color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
