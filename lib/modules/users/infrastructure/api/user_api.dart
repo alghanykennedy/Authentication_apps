@@ -1,7 +1,7 @@
+import 'package:authentication_apps/data/providers/api_client.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/httpClient/dio_with_auth.dart';
-import '../../../../utils/api_endpoints.dart';
 
 import '../../domain/entities/user_response_model.dart';
 import '../../domain/params/user_params.dart';
@@ -15,7 +15,7 @@ class UserApi {
     GetAllUsersParams params,
   ) async {
     var url = Uri.parse(
-      ApiEndPoints.baseUrl + ApiEndPoints.authEndPoints.userList,
+      ApiEndPoints.baseUrl + ApiEndPoints.allUsers,
     );
     final response = await httpClientWithAuth.get(
       url.toString(),

@@ -1,4 +1,4 @@
-import 'package:authentication_apps/core/constants/api_client.dart';
+import 'package:authentication_apps/data/providers/api_client.dart';
 import 'package:authentication_apps/modules/authentication/domain/entities/signup_response_model.dart';
 import 'package:authentication_apps/modules/authentication/domain/params/signup_params.dart';
 import 'package:dio/dio.dart';
