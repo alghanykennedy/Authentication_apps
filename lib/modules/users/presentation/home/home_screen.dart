@@ -13,18 +13,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('User List'),
         actions: [
-          TextButton(
+          IconButton(
+            icon: const Icon(Icons.logout),
             onPressed: () async {
               userController.logout();
             },
-            child: const Text(
-              'logout',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
           ),
         ],
       ),

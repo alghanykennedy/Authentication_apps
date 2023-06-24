@@ -195,6 +195,11 @@ class AuthController extends GetxController {
         signupEmailController.clear();
         signupPasswordController.clear();
         Get.offNamed(RouteNames.loginScreen);
+        Get.snackbar(
+          'Success',
+          'Account created successfully, please login.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
       } else {
         showDialog(
           context: Get.context!,
