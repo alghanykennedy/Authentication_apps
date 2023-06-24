@@ -19,121 +19,125 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
       ),
-      body: ListView(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        const Text(
-                          "Login",
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20, bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      const Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(
-                          height: 10,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Login to your account",
+                        style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(top: 100),
+                        height: 200,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("assets/imgs/background.png"),
+                              fit: BoxFit.fitHeight),
                         ),
-                        Text(
-                          "Login to your account",
-                          style:
-                              TextStyle(fontSize: 15, color: Colors.grey[700]),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 100),
-                          height: 200,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("assets/imgs/background.png"),
-                                fit: BoxFit.fitHeight),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              TextFieldWidget(
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextFieldWidget(
+                              textEditingController:
                                   authController.loginEmailController,
-                                  'name@example.com',
-                                  'email',
-                                  Icons.mail,
-                                  null),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              TextFieldWidget(
-                                authController.loginPasswordController,
-                                'password',
-                                'password',
-                                Icons.lock,
-                                authController.isPasswordVisible.value
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                obscureText:
-                                    authController.isPasswordVisible.value,
-                              ),
-                            ],
-                          ),
+                              hintText: 'name@example.com',
+                              labelText: 'email',
+                              prefixIcon: Icons.mail,
+                              suffixIcon: null,
+                              emailValidator: (value) {
+                                return authController.validateEmail(value);
+                              },
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            TextFieldWidget(
+                              textEditingController:
+                                  authController.loginPasswordController,
+                              hintText: 'password',
+                              labelText: 'password',
+                              prefixIcon: Icons.lock,
+                              suffixIcon: authController.isPasswordVisible.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              obscureText:
+                                  authController.isPasswordVisible.value,
+                              passwordValidator: (value) {
+                                return authController.validatePassword(
+                                    value, 6);
+                              },
+                            ),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        SubmitButton(
-                          onPressed: () => authController.loginWithEmail(),
-                          title: 'Login',
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text("Don't have an account? "),
-                        TextButton(
-                            onPressed: () {
-                              Get.toNamed(RouteNames.signupScreen);
-                            },
-                            child: const Text(
-                              "Signup",
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ))
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      SubmitButton(
+                        onPressed: () => authController.loginWithEmail(),
+                        title: 'Login',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text("Don't have an account? "),
+                      TextButton(
+                          onPressed: () {
+                            Get.toNamed(RouteNames.signupScreen);
+                          },
+                          child: const Text(
+                            "Signup",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ))
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

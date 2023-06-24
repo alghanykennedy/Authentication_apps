@@ -16,6 +16,10 @@ class AuthController extends GetxController {
   final SignupUseCase signupUseCase;
   final CheckTokenUsecase checkTokenUsecase;
   final LogoutUseCase logoutUseCase;
+
+  bool isNameValidationEnable = false;
+  bool isEmailValidationEnable = false;
+  bool isPasswordValidationEnable = false;
   RxBool isPasswordVisible = true.obs;
 
   TextEditingController loginEmailController = TextEditingController();
@@ -47,9 +51,57 @@ class AuthController extends GetxController {
 
   Future<void> loginWithEmail() async {
     try {
+      final String email = loginEmailController.text.trim();
+      final String password = loginPasswordController.text;
+
+      if (email.isEmpty && password.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return const SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [
+                Text(
+                    'Email and password are required. Please input email and password correctly.'),
+              ],
+            );
+          },
+        );
+        return;
+      } else if (email.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return const SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [
+                Text('Email is required. Please input email.'),
+              ],
+            );
+          },
+        );
+        return;
+      } else if (password.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return const SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [
+                Text('Password is required. Please input password.'),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
       final LoginParams loginParams = LoginParams(
-        email: loginEmailController.text.trim(),
-        password: loginPasswordController.text,
+        email: email,
+        password: password,
       );
       final result = await loginUseCase(loginParams);
       if (result.code == 0) {
@@ -73,29 +125,73 @@ class AuthController extends GetxController {
         );
       }
     } catch (error) {
-      Get.back();
-      showDialog(
-        context: Get.context!,
-        builder: (context) {
-          return SimpleDialog(
-            title: const Text('Error'),
-            contentPadding: const EdgeInsets.all(20),
-            children: [Text(error.toString())],
-          );
-        },
-      );
+      // Handle the error
     }
   }
 
   Future<void> signupWithEmail() async {
     try {
+      final String name = nameController.text.trim();
+      final String email = signupEmailController.text.trim();
+      final String password = signupPasswordController.text;
+
+      if (name.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: const Text('Please input name.'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      } else if (email.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return const SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [
+                Text('Email is required. Please input email.'),
+              ],
+            );
+          },
+        );
+        return;
+      } else if (password.isEmpty) {
+        showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return const SimpleDialog(
+              title: Text('Error'),
+              contentPadding: EdgeInsets.all(20),
+              children: [
+                Text('Password is required. Please input password.'),
+              ],
+            );
+          },
+        );
+        return;
+      }
+
       final SignupParams signupParams = SignupParams(
-        name: nameController.text,
-        email: signupEmailController.text.trim(),
-        password: signupPasswordController.text,
+        name: name,
+        email: email,
+        password: password,
       );
       final result = await signupUseCase(signupParams);
       if (result.code == 0) {
+        nameController.clear();
         signupEmailController.clear();
         signupPasswordController.clear();
         Get.offNamed(RouteNames.loginScreen);
@@ -151,6 +247,58 @@ class AuthController extends GetxController {
 
   void togglePasswordVisibility() {
     isPasswordVisible.toggle();
+    update();
+  }
+
+  String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Name is required';
+    }
+
+    return null;
+  }
+
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email is required';
+    }
+    if (!GetUtils.isEmail(value)) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  }
+
+  String? validatePassword(String? value, int minLength) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+    if (value.length < minLength) {
+      return 'Password must be at least $minLength characters';
+    }
+    return null;
+  }
+
+  void updateNameValidation(String value) {
+    if (value.isEmpty) {
+      isNameValidationEnable = true;
+    } else {
+      isNameValidationEnable = false;
+    }
+    update();
+  }
+
+  void updateEmailValidation(String value) {
+    final bool isEmailValid = GetUtils.isEmail(value);
+    isEmailValidationEnable = !isEmailValid;
+    update();
+  }
+
+  void updatePasswordValidation(String value) {
+    if (value.length < 6 || value.isEmpty) {
+      isPasswordValidationEnable = true;
+    } else {
+      isPasswordValidationEnable = false;
+    }
     update();
   }
 }
