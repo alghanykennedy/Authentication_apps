@@ -59,30 +59,51 @@ class _SignupScreenState extends State<SignupScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            TextFieldWidget(authController.nameController,
-                                'Name Example', 'Name', Icons.person, null),
+                            TextFieldWidget(
+                              textEditingController:
+                                  authController.nameController,
+                              hintText: 'Name Example',
+                              labelText: 'name',
+                              prefixIcon: Icons.person,
+                              suffixIcon: null,
+                              nameValidator: (value) {
+                                return authController.validateName(value);
+                              },
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
                             TextFieldWidget(
-                                authController.signupEmailController,
-                                'name@example.com',
-                                'Email',
-                                Icons.mail,
-                                null),
+                              textEditingController:
+                                  authController.signupEmailController,
+                              hintText: 'name@example.com',
+                              labelText: 'email',
+                              prefixIcon: Icons.mail,
+                              suffixIcon: null,
+                              emailValidator: (value) {
+                                return authController.validateEmail(value);
+                              },
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
                             TextFieldWidget(
-                              authController.signupPasswordController,
-                              'password',
-                              'Password',
-                              Icons.lock,
-                              authController.isPasswordVisible.value
+                              textEditingController:
+                                  authController.signupPasswordController,
+                              hintText: 'password',
+                              labelText: 'password',
+                              prefixIcon: Icons.lock,
+                              suffixIcon: authController.isPasswordVisible.value
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                               obscureText:
                                   authController.isPasswordVisible.value,
+                              passwordValidator: (value) {
+                                return authController.validatePassword(
+                                  value,
+                                  6,
+                                );
+                              },
                             ),
                           ],
                         ),
