@@ -89,6 +89,7 @@ In the event of a problem (such as email already register, password less than 6 
 ## Technologies and Packages Used
 
 - Flutter 3.0
+- [Sample Rest API Url](https://www.appsloveworld.com/sample-rest-api-url-for-testing-with-authentication#huserlogin) for testing with authentication
 - [GetX](https://github.com/jonataslaw/getx) for state management 
 - [Dio](https://pub.dev/packages/dio) for provides a clean and efficient API for making HTTP requests
 - [Http](https://pub.dev/packages/http) for sending or fetching data to and from the internet
