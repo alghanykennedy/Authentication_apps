@@ -52,6 +52,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         "Create an acoount, it's free",
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       ),
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40),
                         child: Column(
@@ -109,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 40,
+                        height: 60,
                       ),
                       SubmitButton(
                         onPressed: () => authController.signupWithEmail(),

@@ -1,5 +1,5 @@
 name: authentication_apps
-description: A new Flutter project.
+description: Authentication Flutter App is a simple auth method application built with Flutter 3.0 and powered by the GetX pattern for state management. This app allows you to create account, login and view a list of User with smooth animations..
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev

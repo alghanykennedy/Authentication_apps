@@ -1,7 +1,7 @@
 import 'package:authentication_apps/data/providers/api_client.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/httpClient/dio_with_auth.dart';
+import '../../../../core/http_client/dio_with_auth.dart';
 
 import '../../domain/entities/user_response_model.dart';
 import '../../domain/params/user_params.dart';
