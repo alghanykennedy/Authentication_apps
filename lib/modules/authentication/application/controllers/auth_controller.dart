@@ -58,12 +58,18 @@ class AuthController extends GetxController {
         showDialog(
           context: Get.context!,
           builder: (context) {
-            return const SimpleDialog(
-              title: Text('Error'),
-              contentPadding: EdgeInsets.all(20),
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
               children: [
-                Text(
+                const Text(
                     'Email and password are required. Please input email and password correctly.'),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -73,11 +79,17 @@ class AuthController extends GetxController {
         showDialog(
           context: Get.context!,
           builder: (context) {
-            return const SimpleDialog(
-              title: Text('Error'),
-              contentPadding: EdgeInsets.all(20),
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
               children: [
-                Text('Email is required. Please input email.'),
+                const Text('Email is required. Please input email.'),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -87,11 +99,17 @@ class AuthController extends GetxController {
         showDialog(
           context: Get.context!,
           builder: (context) {
-            return const SimpleDialog(
-              title: Text('Error'),
-              contentPadding: EdgeInsets.all(20),
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
               children: [
-                Text('Password is required. Please input password.'),
+                const Text('Password is required. Please input password.'),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -118,6 +136,12 @@ class AuthController extends GetxController {
               children: [
                 Text(
                   result.message ?? '',
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
                 ),
               ],
             );
@@ -158,11 +182,17 @@ class AuthController extends GetxController {
         showDialog(
           context: Get.context!,
           builder: (context) {
-            return const SimpleDialog(
-              title: Text('Error'),
-              contentPadding: EdgeInsets.all(20),
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
               children: [
-                Text('Email is required. Please input email.'),
+                const Text('Email is required. Please input email.'),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -172,11 +202,17 @@ class AuthController extends GetxController {
         showDialog(
           context: Get.context!,
           builder: (context) {
-            return const SimpleDialog(
-              title: Text('Error'),
-              contentPadding: EdgeInsets.all(20),
+            return SimpleDialog(
+              title: const Text('Error'),
+              contentPadding: const EdgeInsets.all(20),
               children: [
-                Text('Password is required. Please input password.'),
+                const Text('Password is required. Please input password.'),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -211,6 +247,12 @@ class AuthController extends GetxController {
                 Text(
                   result.message ?? '',
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: const Text('Close'),
+                ),
               ],
             );
           },
@@ -225,6 +267,12 @@ class AuthController extends GetxController {
             contentPadding: const EdgeInsets.all(20),
             children: [
               Text(dioError.response?.data.toString() ?? 'An error occurred.'),
+              ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('Close'),
+              ),
             ],
           );
         },
@@ -237,7 +285,15 @@ class AuthController extends GetxController {
             title: const Text('Errorz'),
             contentPadding: const EdgeInsets.all(20),
             children: [
-              Text(error.toString()),
+              Text(
+                error.toString(),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text('Close'),
+              ),
             ],
           );
         },

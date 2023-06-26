@@ -90,24 +90,27 @@ class _SignupScreenState extends State<SignupScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            TextFieldWidget(
-                              textEditingController:
-                                  authController.signupPasswordController,
-                              hintText: 'password',
-                              labelText: 'password',
-                              prefixIcon: Icons.lock,
-                              suffixIcon: authController.isPasswordVisible.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              obscureText:
-                                  authController.isPasswordVisible.value,
-                              passwordValidator: (value) {
-                                return authController.validatePassword(
-                                  value,
-                                  6,
-                                );
-                              },
-                            ),
+                            Obx(() {
+                              return TextFieldWidget(
+                                textEditingController:
+                                    authController.signupPasswordController,
+                                hintText: 'password',
+                                labelText: 'password',
+                                prefixIcon: Icons.lock,
+                                suffixIcon:
+                                    authController.isPasswordVisible.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                obscureText:
+                                    authController.isPasswordVisible.value,
+                                passwordValidator: (value) {
+                                  return authController.validatePassword(
+                                    value,
+                                    6,
+                                  );
+                                },
+                              );
+                            }),
                           ],
                         ),
                       ),

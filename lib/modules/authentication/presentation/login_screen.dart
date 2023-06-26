@@ -87,21 +87,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            TextFieldWidget(
-                              textEditingController:
-                                  authController.loginPasswordController,
-                              hintText: 'password',
-                              labelText: 'password',
-                              prefixIcon: Icons.lock,
-                              suffixIcon: authController.isPasswordVisible.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              obscureText:
-                                  authController.isPasswordVisible.value,
-                              passwordValidator: (value) {
-                                return authController.validatePassword(
-                                    value, 6);
-                              },
+                            Obx(
+                              () => TextFieldWidget(
+                                textEditingController:
+                                    authController.loginPasswordController,
+                                hintText: 'password',
+                                labelText: 'password',
+                                prefixIcon: Icons.lock,
+                                suffixIcon:
+                                    authController.isPasswordVisible.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                obscureText:
+                                    authController.isPasswordVisible.value,
+                                passwordValidator: (value) {
+                                  return authController.validatePassword(
+                                      value, 6);
+                                },
+                              ),
                             ),
                           ],
                         ),
